@@ -1,14 +1,14 @@
 import express, { Express } from "express";
-import { server_cofig } from "./server_config";
+import { server_config } from "@/server_config";
 import bodyParser from "body-parser";
 
 export class AppServer {
   private static server = null;
-  public server_config = server_cofig;
+  public server_config = server_config;
   public app: Express;
 
   constructor() {
-    const port = server_cofig.port ?? 8080;
+    const port = server_config.port ?? 8080;
 
     this.app = express();
     this.app.use(bodyParser.urlencoded({ extended: true }));

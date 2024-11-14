@@ -21,7 +21,7 @@ export interface IServerConfig {
   attached_files_url?: string;
 }
 
-export const server_cofig: IServerConfig = {
+export const server_config: IServerConfig = {
   port: 8080,
   db_config: {
     db: process.env.DB as string,
