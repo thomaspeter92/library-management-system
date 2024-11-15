@@ -1,6 +1,7 @@
 import express, { Express } from "express";
 import { server_config } from "@/server_config";
 import bodyParser from "body-parser";
+import { AppRouter } from "./routers/routes";
 
 export class AppServer {
   private static server = null;
@@ -17,6 +18,11 @@ export class AppServer {
     this.app.get("/ping", (req, res) => {
       res.send("pong");
     });
+
+    const router = new AppRouter(this.app);
+    if (router) {
+      console.log("Router connected!");
+    }
 
     AppServer.server = this.app.listen(port, () => {
       console.log(`Server running on port ${port} with pid = ${process.pid} `);
