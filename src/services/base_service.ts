@@ -149,8 +149,8 @@ export class BaseService<T> {
             field !== "page"
           ) {
             const value = queryParams[field];
-            query.andWhere(`LOWER(${field}) = LOWER(:${field})`, {
-              [field]: value,
+            query.andWhere(`LOWER(${field}) LIKE LOWER(:${field})`, {
+              [field]: `%${value}%`,
             });
           }
         }
