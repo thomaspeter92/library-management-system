@@ -1,9 +1,10 @@
+require("dotenv").config();
+
 import { AppServer } from "@/server";
 import cluster from "cluster";
 import os from "os";
 import { DatabaseUtil } from "@/util/database_util";
-
-require("dotenv").config();
+import { DDUtil } from "./util/default_data_util";
 
 // Get the amount of CPU on OS for # of clusters
 const numCPUs = os.cpus().length;
@@ -13,14 +14,18 @@ const args = process.argv.slice(2);
 
 if (cluster.isPrimary) {
   console.log(`Master process PID: ${process.pid}`);
-
+  console.log(args);
   // For initial call to populate the DB with Super Admin etc
   if (args.length > 0 && args[0] === "--init") {
-    async () => {
+    (async () => {
       // Get DB
+      console.log("hello");
+      await DatabaseUtil.getInstance();
       // Add defaults to DB
+      await DDUtil.addDefaultRole();
+      await DDUtil.addDefaultUser();
       process.exit();
-    };
+    })();
   } else {
     for (let i = 0; i < numCPUs; i++) {
       cluster.fork();

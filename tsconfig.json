@@ -16,7 +16,7 @@
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
-    // "types": ["express", "./src/custom.d.ts"]
+    "types": ["express", "./src/custom.d.ts"],
     // "skipLibCheck": true
     "paths": {
       "@/*": ["*"] // Match anything under src/ with @/
