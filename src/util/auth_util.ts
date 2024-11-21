@@ -25,8 +25,7 @@ export const authorize = async (
     // verify access token
     const decodedToken = jwt.verify(token, SERVER_CONST.JWTSECRET);
     req.user = {};
-    req.user.user_id = decodedToken["user_id"] ?? "";
-    req.user.username = decodedToken["username"] ?? "";
+    req.user.id = decodedToken["id"] ?? "";
     req.user.email = decodedToken["email"] ?? "";
     //   if (req.user.username) {
     //     const user: Users = await UsersUtil.getUserFromUsername(

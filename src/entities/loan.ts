@@ -16,12 +16,12 @@ export class Loan {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   @ManyToOne(() => Book, (bookData) => bookData.id)
   @JoinColumn({ name: "book_id" })
   book_id: string;
 
-  @Column()
+  @Column({ nullable: false })
   @ManyToOne(() => User, (userData) => userData.id)
   @JoinColumn({ name: "user_id" })
   user_id: string;
@@ -29,6 +29,6 @@ export class Loan {
   @CreateDateColumn()
   loan_date: Date;
 
-  @Column()
+  @Column({ nullable: true })
   return_date: Date;
 }

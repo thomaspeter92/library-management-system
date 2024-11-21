@@ -1,12 +1,13 @@
 import { Express, Router } from "express";
 import { BooksRouter } from "./books_router";
 import { UserRouter } from "./user_router";
+import { LoansRouter } from "./loans_router";
 
 export class AppRouter {
   public router: Router;
 
   constructor(app: Express) {
-    const routerClasses = [BooksRouter, UserRouter];
+    const routerClasses = [BooksRouter, UserRouter, LoansRouter];
 
     for (const RouterClass of routerClasses) {
       try {

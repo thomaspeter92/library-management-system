@@ -28,7 +28,6 @@ export class UserController extends BaseController {
     const result = await service.findAll({ email: email });
 
     console.log(result);
-
     if (result.data.length < 1) {
       res
         .status(404)
@@ -50,13 +49,13 @@ export class UserController extends BaseController {
 
     // Generate access and refresh token
     const accessToken: string = jwt.sign(
-      { email: user.email, user_id: user.id },
+      { email: user.email, id: user.id },
       SERVER_CONST.JWTSECRET,
       { expiresIn: SERVER_CONST.ACCESS_TOKEN_EXPIRY_TIME_SECONDS }
     );
 
     const refreshToken: string = jwt.sign(
-      { email: user.email, user_id: user.id },
+      { email: user.email, id: user.id },
       SERVER_CONST.JWTSECRET,
       { expiresIn: SERVER_CONST.ACCESS_TOKEN_EXPIRY_TIME_SECONDS }
     );

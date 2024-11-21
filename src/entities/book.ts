@@ -24,14 +24,14 @@ export class Book {
   description: string;
 
   @Column({ nullable: true, unique: false })
-  year: string;
+  year: number;
 
   @Column({ nullable: true, unique: false })
   rating: string;
 
   @Column({ nullable: true, unique: false })
-  pages: string;
+  pages: number;
 
   @Column({ nullable: true, unique: false })
-  ratings_count: string;
+  ratings_count: number;
 }
