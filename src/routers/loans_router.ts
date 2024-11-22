@@ -1,6 +1,6 @@
 import { LoansController } from "@/controllers/loans_controller";
 import { authorize } from "@/util/auth_util";
-import { newLoanValidator } from "@/validators/loans";
+import { newLoanValidator, updateLoanValidator } from "@/validators/loans";
 import { validate } from "@/validators/validate";
 import { Express } from "express";
 export class LoansRouter {
@@ -12,6 +12,8 @@ export class LoansRouter {
     app
       .route(this.baseEndpoint)
       .all(authorize)
-      .post(validate(newLoanValidator), controller.addHandler);
+      .get(controller.getAllHandler)
+      .post(validate(newLoanValidator), controller.addHandler)
+      .put(validate(updateLoanValidator), controller.updateHandler);
   }
 }

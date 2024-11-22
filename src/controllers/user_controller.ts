@@ -4,16 +4,38 @@ import { UserService } from "@/services/user_service";
 import { SERVER_CONST } from "@/util/common";
 import * as jwt from "jsonwebtoken";
 import { bcryptCompare } from "@/util/common";
+import { LoansUtil } from "./loans_controller";
 
 export class UserController extends BaseController {
   public addHandler(req: Request, res: Response): void {}
   public async getAllHandler(req: Request, res: Response) {
     const service = new UserService();
     const result = await service.findAll(req.query);
+    if (result.statusCode === 200) {
+      // Remove password field to send in response
+      result.data.forEach((i) => delete i.password);
+    }
+    res.status(result.statusCode).json(result);
+  }
+
+  public async getOneHandler(req: Request, res: Response): Promise<void> {
+    const service = new UserService();
+
+    const result = await service.findOne(req.params.id);
+
+    if (result.statusCode == 200) {
+      // Remove password field to send in response
+      delete result.data.password;
+
+      const activeLoans = await LoansUtil.getActiveLoansByUserId(
+        result.data.id
+      );
+
+      result.data["active_loans"] = activeLoans;
+    }
 
     res.status(result.statusCode).json(result);
   }
-  public getOneHandler(req: Request, res: Response): void {}
   public updateHandler(req: Request, res: Response): void {}
   public deleteHandler(req: Request, res: Response): void {}
 

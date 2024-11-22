@@ -9,6 +9,8 @@ export class UserRouter {
 
     app.route(this.baseEndpoint).get(controller.getAllHandler);
 
+    app.route(this.baseEndpoint + "/:id").get(controller.getOneHandler);
+
     app.route("/api/v1/login").post(controller.login);
   }
 }

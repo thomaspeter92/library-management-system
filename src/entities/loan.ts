@@ -31,4 +31,7 @@ export class Loan {
 
   @Column({ nullable: true })
   return_date: Date;
+
+  @Column({ type: "timestamp", default: () => "NOW() + INTERVAL '3 weeks'" })
+  due_date: Date;
 }

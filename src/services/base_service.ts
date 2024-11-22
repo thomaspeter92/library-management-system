@@ -229,6 +229,7 @@ export class BaseService<T> {
 
   async customQuery(query: string): Promise<T[]> {
     try {
+      console.log(query);
       const data = await this.repository
         .createQueryBuilder()
         .where(query)
