@@ -39,6 +39,8 @@ export const ERROR_MESSAGES = {
   SERVER_ERROR: "Unkown server error fallback",
   INVALID_DATA: "The data provided to the API was of the wrong format",
   NOT_FOUND: "The entity requested was not found in the DB",
+  EMAIL_NOT_FOUND: "This email was not in the DB",
+  INVALID_PASSWORD: "Password not valid",
 };
 
 export const SERVER_CONST = {

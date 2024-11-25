@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { BaseController } from "./base_controller";
 import { BooksService } from "@/services/books_service";
 import { LoansUtil } from "./loans_controller";
+import { Book } from "@/entities/book";
 
 export class BooksController extends BaseController {
   public async addHandler(req: Request, res: Response): Promise<void> {

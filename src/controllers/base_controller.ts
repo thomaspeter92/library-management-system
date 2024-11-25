@@ -1,3 +1,4 @@
+import { ApiResponse } from "@/services/base_service";
 import { Request, Response } from "express";
 
 export abstract class BaseController {

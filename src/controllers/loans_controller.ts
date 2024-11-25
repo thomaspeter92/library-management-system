@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
 import { BaseController } from "./base_controller";
 import { LoanService } from "@/services/loans_service";
+import { Loan } from "@/entities/loan";
 
 export class LoansController extends BaseController {
+  /**
+   * TO DO: Add checking here to ensure that user has no outstanding loans
+   * They should be blocked form making new loans if they do!
+   * @param req
+   * @param res
+   */
   public async addHandler(req: Request, res: Response): Promise<void> {
     const service = new LoanService();
 
@@ -22,7 +29,9 @@ export class LoansController extends BaseController {
 
     res.status(result.statusCode).json(result);
   }
+
   public getOneHandler(req: Request, res: Response): void {}
+
   public async getAllHandler(req: Request, res: Response): Promise<void> {
     const service = new LoanService();
 
@@ -30,6 +39,7 @@ export class LoansController extends BaseController {
 
     res.status(result.statusCode).json(result);
   }
+
   public deleteHandler(req: Request, res: Response): void {}
 }
 
@@ -49,7 +59,9 @@ export class LoansUtil {
     return false;
   }
 
-  public static async getActiveLoansByUserId(user_id: string) {
+  public static async getActiveLoansByUserId(
+    user_id: string
+  ): Promise<({ outstanding?: boolean } & Loan)[]> {
     const service = new LoanService();
 
     // If the return date is null, the book hasnt been returned yet
@@ -58,6 +70,10 @@ export class LoansUtil {
     );
 
     if (result && result.length > 0) {
+      for (const loan of result) {
+        const dueDate = new Date(loan.due_date).getTime();
+        loan["outstanding"] = dueDate < Date.now();
+      }
       return result;
     }
     return [];
