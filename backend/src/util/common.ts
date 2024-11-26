@@ -41,6 +41,7 @@ export const ERROR_MESSAGES = {
   NOT_FOUND: "The entity requested was not found in the DB",
   EMAIL_NOT_FOUND: "This email was not in the DB",
   INVALID_PASSWORD: "Password not valid",
+  AUTH_TOKEN: "Missing or faulty token",
 };
 
 export const SERVER_CONST = {

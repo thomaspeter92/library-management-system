@@ -10,6 +10,8 @@ export class UserRouter {
   constructor(app: Express) {
     const controller = new UserController();
 
+    app.route(this.baseEndpoint + "/login").post(controller.login);
+
     app
       .route(this.baseEndpoint)
       .all(authorize)
@@ -21,7 +23,5 @@ export class UserRouter {
       .all(authorize)
       .get(controller.getOneHandler)
       .delete(controller.deleteHandler);
-
-    app.route("/api/v1/login").post(controller.login);
   }
 }

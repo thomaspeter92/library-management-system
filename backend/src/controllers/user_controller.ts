@@ -99,8 +99,6 @@ export class UserController extends BaseController {
     const service = new UserService();
     const result = await service.findAll({ email: email });
 
-    console.log(result);
-
     if (result.data.length < 1) {
       responseUtil(res, 404, {
         statusCode: 404,
@@ -146,8 +144,8 @@ export class UserController extends BaseController {
       status: "success",
       data: {
         ...user,
-        accessToken,
-        refreshToken,
+        access_token: accessToken,
+        refresh_token: refreshToken,
       },
     });
     return;

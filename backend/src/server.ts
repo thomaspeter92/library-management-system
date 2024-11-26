@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import { server_config } from "@/server_config";
 import bodyParser from "body-parser";
 import { AppRouter } from "./routers/routes";
+import cors from "cors";
 
 export class AppServer {
   private static server = null;
@@ -12,6 +13,7 @@ export class AppServer {
     const port = server_config.port ?? 8080;
 
     this.app = express();
+    this.app.use(cors());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(bodyParser.json());
 
