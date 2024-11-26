@@ -1,0 +1,28 @@
+<div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="off"
+        email
+        required
+        formControlName="email"
+      />
+    </div>
+
+    <div>
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="off"
+        name="password"
+        required
+        formControlName="password"
+      />
+    </div>
+    <button type="submit">Login</button>
+  </form>
+</div>

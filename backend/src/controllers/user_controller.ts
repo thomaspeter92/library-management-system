@@ -99,6 +99,8 @@ export class UserController extends BaseController {
     const service = new UserService();
     const result = await service.findAll({ email: email });
 
+    console.log(result);
+
     if (result.data.length < 1) {
       responseUtil(res, 404, {
         statusCode: 404,
@@ -134,11 +136,16 @@ export class UserController extends BaseController {
       { expiresIn: SERVER_CONST.ACCESS_TOKEN_EXPIRY_TIME_SECONDS }
     );
 
+    delete user.password;
+    delete user.created_at;
+    delete user.updated_at;
+
     // Respond with tokens
     res.status(200).json({
       statusCode: 200,
       status: "success",
       data: {
+        ...user,
         accessToken,
         refreshToken,
       },
