@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { ApiPaths } from '../../../enums/api-paths';
 import { BehaviorSubject, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { ApiResponse } from '../models/api-response.model';
 
-export interface LoginAPIResponse {
+export type LoginAPIResponse = ApiResponse<{
   id: string;
   email: string;
   first_name: string;
@@ -12,7 +13,7 @@ export interface LoginAPIResponse {
   role_id: string;
   access_token: string;
   refresh_token: string;
-}
+}>;
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,9 @@ export class AuthService {
         password: password,
       })
       .pipe(
-        tap((data) => {
+        tap((res) => {
+          const data = res.data;
+
           const user = new User(
             data.id,
             data.email,
@@ -39,6 +42,8 @@ export class AuthService {
             data.access_token,
             data.refresh_token
           );
+
+          console.log(user);
 
           if (user.token) {
             this.currentUser.next(user);

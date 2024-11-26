@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     authObs.subscribe({
-      next: () => {
+      next: (data) => {
+        console.log(data);
         this.isError = false;
         this.isLoading = false;
         this.router.navigate(['/']);
@@ -60,6 +61,6 @@ export class LoginComponent implements OnInit {
       },
     });
 
-    this.loginForm.reset();
+    // this.loginForm.reset();
   }
 }

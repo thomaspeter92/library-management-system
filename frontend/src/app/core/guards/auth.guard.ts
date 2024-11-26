@@ -9,36 +9,33 @@ import {
 } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
+import { Observable, take, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate, OnInit, OnDestroy {
-  private userSub: Subscription | null = null;
-  isAuthenticated = false;
-
+export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-
-  ngOnInit(): void {
-    this.userSub = this.authService.currentUser.subscribe((user) => {
-      this.isAuthenticated = !!user;
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.userSub) {
-      this.userSub.unsubscribe();
-    }
-  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): MaybeAsync<GuardResult> {
-    if (this.isAuthenticated) {
-      return true;
-    }
-    this.router.navigate(['login']);
-    return false;
+  ): Observable<boolean> {
+    return this.authService.currentUser.pipe(
+      take(1), // Ensure the guard completes after emitting the first value
+      map((user) => {
+        console.log(user);
+
+        const isAuthenticated = !!user;
+
+        if (isAuthenticated) {
+          return true;
+        }
+
+        // Redirect to login if not authenticated
+        this.router.navigate(['login']);
+        return false;
+      })
+    );
   }
 }
