@@ -1,8 +1,19 @@
-<div>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="email">Email</label>
+<div class="container">
+  <form
+    class="loginForm shadow"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <h1>Login</h1>
+
+    @if(error){
+    <app-alert variant="error">{{ error }}</app-alert>
+    }
+
+    <div class="formGroup">
+      <label class="label" for="email">Email</label>
       <input
+        class="textInput"
         id="email"
         type="email"
         autocomplete="off"
@@ -12,9 +23,10 @@
       />
     </div>
 
-    <div>
-      <label for="password">Password</label>
+    <div class="formGroup">
+      <label class="label" for="password">Password</label>
       <input
+        class="textInput"
         id="password"
         type="password"
         autocomplete="off"
@@ -23,6 +35,12 @@
         formControlName="password"
       />
     </div>
-    <button type="submit">Login</button>
+    <app-button
+      variant="green"
+      [fullWidth]="true"
+      [disabled]="!loginForm.valid"
+    >
+      Login
+    </app-button>
   </form>
 </div>

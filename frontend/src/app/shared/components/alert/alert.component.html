@@ -1,0 +1,23 @@
+<div [ngClass]="['alert', 'alert-' + variant]">
+  <div class="icon">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="success icon"
+      fontIcon="{{ variant === 'success' ? 'task_alt' : 'error' }}"
+    />
+  </div>
+  <div class="content">
+    <h3>
+      {{
+        variant === "success"
+          ? "Success"
+          : variant === "error"
+          ? "Error"
+          : "Warning"
+      }}
+    </h3>
+    <p>
+      <ng-content />
+    </p>
+  </div>
+</div>

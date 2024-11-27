@@ -4,6 +4,7 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 
 import { CanActivateFn } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { LoginGuard } from './core/guards/login.guard';
 
 export const alwaysFalseGuard: CanActivateFn = () => {
   return false; // Always prevents activation
@@ -11,6 +12,6 @@ export const alwaysFalseGuard: CanActivateFn = () => {
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
 ];

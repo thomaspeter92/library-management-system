@@ -139,7 +139,7 @@ export class UserController extends BaseController {
     delete user.updated_at;
 
     // Respond with tokens
-    res.status(200).json({
+    responseUtil(res, 200, {
       statusCode: 200,
       status: "success",
       data: {
@@ -148,6 +148,7 @@ export class UserController extends BaseController {
         refresh_token: refreshToken,
       },
     });
+
     return;
   }
 }
