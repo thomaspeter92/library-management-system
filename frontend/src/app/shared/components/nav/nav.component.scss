@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  color: var(--purple);
-  background-color: white;
+  color: var(--gray-100);
+  background-color: var(--gray-900);
   height: 4rem;
   gap: 1rem;
   .brand {
@@ -33,8 +33,8 @@
     li {
       &:hover,
       &.active {
-        background-color: var(--gray-100);
-        // color: var(--gray-500);
+        background-color: var(--cyan);
+        color: var(--gray-900);
         transition: all ease 0.3s;
       }
       a {
@@ -54,7 +54,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--gray-500);
+      color: var(--cyan);
     }
 
     .menuContent {

@@ -26,8 +26,16 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  togglePage() {
-    this.currentPage++;
-    this.fetchBooks();
+  nextPage() {
+    if (this.totalPages && this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.fetchBooks();
+    }
+  }
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.fetchBooks();
+    }
   }
 }

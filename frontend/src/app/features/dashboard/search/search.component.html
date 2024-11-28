@@ -1,9 +1,26 @@
-<app-button (clicked)="togglePage()"> Next Page </app-button>
-<p>Total Pages: {{ totalPages }}</p>
-<div>
-  @for (book of books; track $index) {
-  <div>
-    <p>{{ book.title }}</p>
-  </div>
-  }
+<!-- <app-button (clicked)="prevPage()"> Prev Page </app-button>
+<app-button (clicked)="nextPage()"> Next Page </app-button> -->
+
+<!-- <p>Total Pages: {{ totalPages }}</p> -->
+
+<div class="page">
+  <section>
+    <div class="formGroup">
+      <input type="text" class="textInput" />
+      <app-button>Search</app-button>
+    </div>
+  </section>
+
+  <h2>All Results:</h2>
+  <section class="searchContainer">
+    @for (book of books; track $index) {
+    <div class="bookCard">
+      <div class="thumbnail">
+        <img src="{{ book.thumbnail }}" alt="" />
+      </div>
+      <p class="title">{{ book.title }}</p>
+      <p class="authors">{{ book.authors }}</p>
+    </div>
+    }
+  </section>
 </div>
