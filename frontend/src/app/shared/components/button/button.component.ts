@@ -12,7 +12,7 @@ type ButtonVariant = 'primary' | 'green' | 'red' | 'purple' | 'beige' | 'cyan';
 })
 export class ButtonComponent {
   @Input() variant: ButtonVariant = 'primary';
-  @Input() disabled!: boolean;
+  @Input() disabled: boolean = false;
   @Input() fullWidth!: boolean;
   @Output() clicked: EventEmitter<void> = new EventEmitter<void>();
 

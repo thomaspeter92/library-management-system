@@ -1,0 +1,32 @@
+<nav class="navigation">
+  <a class="brand" routerLink="/">
+    <mat-icon aria-hidden="false" aria-label="success icon" fontIcon="home" />
+    <h1>LMS</h1>
+  </a>
+
+  <ul class="menu">
+    <li routerLinkActive="active">
+      <a routerLink="/loans">Loans</a>
+    </li>
+    <li routerLinkActive="active">
+      <a routerLink="/account">Account</a>
+    </li>
+  </ul>
+  <div class="menuContainer">
+    <button (click)="toggleMenu()" class="menuButton">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="success icon"
+        fontIcon="account_circle"
+      />
+      {{ user.lastName }}, {{ user.firstName }}
+    </button>
+    @if(menuOpen){
+    <menu class="menuContent shadow-light">
+      <app-button (clicked)="handleLogout()" variant="cyan">
+        Log out
+      </app-button>
+    </menu>
+    }
+  </div>
+</nav>

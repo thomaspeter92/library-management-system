@@ -39,9 +39,10 @@ export class AuthService {
         }),
         catchError((err: HttpErrorResponse) =>
           throwError(() => {
+            console.log(err.error);
             let message;
-            if (err.message in ERROR_MESSAGES) {
-              message = err.message;
+            if (err.error && err.error.message in ERROR_MESSAGES) {
+              message = err.error.message;
             } else {
               message = 'SERVER_ERROR';
             }

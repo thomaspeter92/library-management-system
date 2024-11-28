@@ -1,6 +1,7 @@
 <button
   [disabled]="disabled"
   [ngClass]="['btn btn-' + variant, fullWidth ? 'btn-full' : '']"
+  (click)="onClick()"
 >
   <ng-content></ng-content>
 </button>

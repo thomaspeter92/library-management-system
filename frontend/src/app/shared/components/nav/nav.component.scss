@@ -1,0 +1,68 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  color: var(--purple);
+  background-color: white;
+  height: 4rem;
+  gap: 1rem;
+  .brand {
+    flex: 1;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .mat-icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 2rem;
+  }
+
+  .menu {
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+
+    li {
+      &:hover,
+      &.active {
+        background-color: var(--gray-100);
+        // color: var(--gray-500);
+        transition: all ease 0.3s;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        padding: 0 1rem;
+        cursor: pointer;
+        height: 100%;
+      }
+    }
+  }
+
+  .menuContainer {
+    position: relative;
+    .menuButton {
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gray-500);
+    }
+
+    .menuContent {
+      position: absolute;
+      top: 100%;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 0.3rem;
+    }
+  }
+}

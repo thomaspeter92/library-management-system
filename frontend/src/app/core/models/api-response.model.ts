@@ -14,10 +14,8 @@ export interface ApiResponse<T = unknown> {
   status: 'error' | 'success';
   message?: keyof typeof ERROR_MESSAGES;
   data: T;
-  pagination?: {
-    total: number;
-    totalPages: number;
-    currentPage: number;
-    limit: number;
-  };
+  total?: number;
+  totalPages?: number;
+  currentPage?: number;
+  limit?: number;
 }

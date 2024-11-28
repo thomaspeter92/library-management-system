@@ -1,10 +1,10 @@
 export class User {
   constructor(
-    private id: string,
-    private email: string,
-    private firstName: string,
-    private lastName: string,
-    private roleId: string,
+    public id: string,
+    public email: string,
+    public firstName: string,
+    public lastName: string,
+    public roleId: string,
     private accessToken: string,
     private refreshToken: string
   ) {}

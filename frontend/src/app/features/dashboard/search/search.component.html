@@ -1,0 +1,9 @@
+<app-button (clicked)="togglePage()"> Next Page </app-button>
+<p>Total Pages: {{ totalPages }}</p>
+<div>
+  @for (book of books; track $index) {
+  <div>
+    <p>{{ book.title }}</p>
+  </div>
+  }
+</div>
