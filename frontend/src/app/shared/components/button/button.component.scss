@@ -3,7 +3,7 @@
   border: 1px solid transparent;
   font-weight: 600;
   padding: 0 2rem;
-  border-radius: 0.3rem;
+  // border-radius: 0.3rem;
   height: 3rem;
   text-transform: capitalize;
   cursor: pointer;
@@ -24,6 +24,11 @@
     color: white;
   }
 
+  &-navy {
+    background-color: var(--navy);
+    color: white;
+  }
+
   &-red {
     background-color: var(--red);
     color: white;
@@ -41,6 +46,11 @@
       background-color: var(--beige-100);
       color: var(--beige-500);
     }
+  }
+
+  &-blue {
+    background-color: var(--blue);
+    color: white;
   }
 
   &-cyan {

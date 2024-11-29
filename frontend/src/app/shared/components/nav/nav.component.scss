@@ -2,10 +2,11 @@
   display: flex;
   align-items: center;
   padding: 0 1rem;
-  color: var(--gray-100);
-  background-color: var(--gray-900);
+  color: white;
+  background-color: var(--navy);
   height: 4rem;
   gap: 1rem;
+
   .brand {
     flex: 1;
     padding: 1rem 0;
@@ -54,7 +55,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: var(--cyan);
+      // color: var(--cyan);
     }
 
     .menuContent {

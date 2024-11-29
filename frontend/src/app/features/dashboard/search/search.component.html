@@ -4,23 +4,74 @@
 <!-- <p>Total Pages: {{ totalPages }}</p> -->
 
 <div class="page">
-  <section>
-    <div class="formGroup">
-      <input type="text" class="textInput" />
-      <app-button>Search</app-button>
-    </div>
-  </section>
-
-  <h2>All Results:</h2>
   <section class="searchContainer">
+    <h1>Welcome to Keele University Library</h1>
+    <h3>
+      We have thousands of books available, use this search facility to find
+      them in our library catalogue
+    </h3>
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="searchForm">
+      <input
+        placeholder="Search title or authors..."
+        formControlName="search"
+        required
+        class="input"
+        type="text"
+      />
+      <app-button variant="navy">Search</app-button>
+    </form>
+  </section>
+  @if(books.length > 0){
+  <div class="resultsInfo">
+    <h2>All Results:</h2>
+    <p class="pages">Page {{ currentPage }} of {{ totalPages }}</p>
+    <p class="results">({{ totalResults.toLocaleString() }} total results)</p>
+  </div>
+  <section class="resultsContainer2">
+    @for (book of books; track $index) {
+    <article class="card">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="success icon"
+        fontIcon="check_circle"
+        class="availableIcon"
+      />
+
+      <img src="{{ book.thumbnail }}" />
+      <div class="info">
+        <p class="genre">{{ book.genre }}</p>
+        <h3 class="title">{{ book.title }} {{ book.subtitle }}</h3>
+        <p class="authors">{{ book.authors | splitSemi }}</p>
+        <p class="year">{{ book.year }}</p>
+        <p class="description">
+          {{ book.description.substring(0, 175) + "..." }}
+        </p>
+
+        <div class="rating">
+          @for (star of generateArray(book.rating); track $index) {
+          <mat-icon
+            aria-hidden="false"
+            aria-label="success icon"
+            fontIcon="star"
+          />
+          }
+          <span> ({{ book.ratings_count }}) </span>
+        </div>
+      </div>
+    </article>
+    }
+  </section>
+  <!-- <section class="resultsContainer">
     @for (book of books; track $index) {
     <div class="bookCard">
       <div class="thumbnail">
         <img src="{{ book.thumbnail }}" alt="" />
       </div>
       <p class="title">{{ book.title }}</p>
+      <p class="year">{{ book.year }}</p>
       <p class="authors">{{ book.authors }}</p>
     </div>
     }
-  </section>
+  </section> -->
+  }
 </div>

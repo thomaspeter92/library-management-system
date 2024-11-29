@@ -1,7 +1,15 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass } from '@angular/common';
 
-type ButtonVariant = 'primary' | 'green' | 'red' | 'purple' | 'beige' | 'cyan';
+type ButtonVariant =
+  | 'primary'
+  | 'green'
+  | 'red'
+  | 'purple'
+  | 'beige'
+  | 'cyan'
+  | 'blue'
+  | 'navy';
 
 @Component({
   selector: 'app-button',

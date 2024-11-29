@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ButtonComponent } from '../button/button.component';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../core/models/user.model';
@@ -8,7 +8,7 @@ import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
-  imports: [MatIconModule, RouterLink, RouterLinkActive, ButtonComponent],
+  imports: [MatIconModule, RouterLink, ButtonComponent],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })

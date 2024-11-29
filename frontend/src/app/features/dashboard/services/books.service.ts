@@ -8,7 +8,7 @@ export interface Book {
   title: string;
   year: number;
   authors: string;
-  descrption: string;
+  description: string;
   genre: string;
   id: string;
   pages: number;
@@ -27,6 +27,16 @@ export class BooksService {
   getAllBooks(page: number = 1, limit: number = 20) {
     return this.http.get<ApiResponse<Book[]>>(ApiPaths.Books, {
       params: new HttpParams().set('page', page).set('limit', limit),
+    });
+  }
+
+  getBooks(page: number = 1, limit: number = 20, searchTerm: string) {
+    return this.http.get<ApiResponse<Book[]>>(ApiPaths.Books, {
+      params: new HttpParams()
+        .set('page', page)
+        .set('limit', limit)
+        .set('title', searchTerm)
+        .set('authors', searchTerm),
     });
   }
 }
