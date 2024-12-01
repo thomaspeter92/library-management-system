@@ -1,6 +1,3 @@
-<!-- <app-button (clicked)="prevPage()"> Prev Page </app-button>
-<app-button (clicked)="nextPage()"> Next Page </app-button> -->
-
 <!-- <p>Total Pages: {{ totalPages }}</p> -->
 
 <div class="page">
@@ -21,30 +18,77 @@
       <app-button variant="navy">Search</app-button>
     </form>
   </section>
-  @if(books.length > 0){
-  <div class="resultsInfo">
-    <h2>All Results:</h2>
-    <p class="pages">Page {{ currentPage }} of {{ totalPages }}</p>
-    <p class="results">({{ totalResults.toLocaleString() }} total results)</p>
-  </div>
-  <section class="resultsContainer2">
-    @for (book of books; track $index) {
-    <article class="card">
+  @if(!books) {
+  <section class="features">
+    <button class="featureButton">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="success icon"
+        fontIcon="menu_book"
+      />
+      <p>Search Books</p>
+    </button>
+    <button class="featureButton">
       <mat-icon
         aria-hidden="false"
         aria-label="success icon"
         fontIcon="check_circle"
+      />
+      <p>Search Books</p>
+    </button>
+    <button class="featureButton">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="success icon"
+        fontIcon="manage_accounts"
         class="availableIcon"
       />
-
+      <p>Search Books</p>
+    </button>
+  </section>
+  } @else if(books && books.length < 1) {
+  <div class="noResults">
+    <h3>No Results</h3>
+    <p>
+      Your search term returned no results from our database. Please try again.
+    </p>
+  </div>
+  } @else if(books && books.length > 0){
+  <div class="resultsInfo">
+    <h2>All Results:</h2>
+    <p class="pages">Page {{ currentPage }} of {{ totalPages }}</p>
+    <p class="results">({{ totalResults.toLocaleString() }} total results)</p>
+    <button (click)="onClearResults()" class="clearButton">
+      Clear Results X
+    </button>
+  </div>
+  <section class="resultsContainer2">
+    @for (book of books; track $index) {
+    <article class="card" (click)="onSelectBook(book.id)">
+      <!-- <mat-icon
+        aria-hidden="false"
+        aria-label="success icon"
+        fontIcon="check_circle"
+        class="availableIcon"
+      /> -->
+      @if(book.thumbnail){
       <img src="{{ book.thumbnail }}" />
+      }@else {
+      <div class="iconContainer">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="success icon"
+          fontIcon="menu_book"
+        />
+      </div>
+      }
       <div class="info">
         <p class="genre">{{ book.genre }}</p>
         <h3 class="title">{{ book.title }} {{ book.subtitle }}</h3>
-        <p class="authors">{{ book.authors | splitSemi }}</p>
+        <p class="authors">{{ book.authors | splitSemi : 50 }}</p>
         <p class="year">{{ book.year }}</p>
         <p class="description">
-          {{ book.description.substring(0, 175) + "..." }}
+          {{ book.description && book?.description?.substring(0, 150) + "..." }}
         </p>
 
         <div class="rating">
@@ -55,12 +99,33 @@
             fontIcon="star"
           />
           }
-          <span> ({{ book.ratings_count }}) </span>
+          <span> ({{ book?.ratings_count?.toLocaleString() }}) </span>
         </div>
+        <button class="seeMore" (click)="onSelectBook(book.id)">
+          See more
+        </button>
       </div>
     </article>
     }
   </section>
+  @if(totalPages > 1) {
+  <div class="buttonContainer">
+    <app-button
+      [disabled]="currentPage <= 1"
+      variant="blue"
+      (clicked)="prevPage()"
+    >
+      Prev Page
+    </app-button>
+    <app-button
+      [disabled]="currentPage >= totalPages"
+      variant="blue"
+      (clicked)="nextPage()"
+    >
+      Next Page
+    </app-button>
+  </div>
+  }
   <!-- <section class="resultsContainer">
     @for (book of books; track $index) {
     <div class="bookCard">
@@ -73,5 +138,10 @@
     </div>
     }
   </section> -->
+
+  } @if(bookDetailOpen && selectedBook){
+  <app-modal (close)="onCloseBookDetail()">
+    <app-book-detail bookId="{{ selectedBook }}" />
+  </app-modal>
   }
 </div>

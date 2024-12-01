@@ -1,0 +1,56 @@
+@if(book){
+<div class="container">
+  <div>
+    <img src="{{ book.thumbnail }}" alt="" />
+    <div class="status">
+      @if(book.available) {
+      <p class="available">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="success icon"
+          fontIcon="check_circle"
+        />Available
+      </p>
+      } @else {
+      <p class="unavailable">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="success icon"
+          fontIcon="cancel"
+        />Available
+      </p>
+      }
+    </div>
+    <app-button variant="blue" [fullWidth]="true">Loan</app-button>
+  </div>
+  <div>
+    <p class="genre">
+      {{ book.genre }}
+    </p>
+    <h3 class="title">
+      {{ book.title }} {{ book.subtitle ? " | " + book.subtitle : "" }}
+    </h3>
+    <p class="authors">{{ book.authors | splitSemi }}</p>
+
+    <p class="year">{{ book.year }}</p>
+    <p class="description">{{ book.description }}</p>
+
+    <div class="additional">
+      <p class="pages">Pages: {{ book.pages }}</p>
+      <div class="rating">
+        @for (star of stars; track $index) {
+        <mat-icon
+          aria-hidden="false"
+          aria-label="success icon"
+          fontIcon="star"
+        />
+
+        }
+        <p class="ratingCount">
+          ({{ book.ratings_count.toLocaleString() }} reviews)
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+}

@@ -16,6 +16,7 @@ export interface Book {
   ratings_count: number;
   subtitle?: string;
   thumbnail?: string;
+  available?: boolean; // this is only available on the getBookById response
 }
 
 @Injectable({
@@ -24,13 +25,13 @@ export interface Book {
 export class BooksService {
   constructor(private http: HttpClient) {}
 
-  getAllBooks(page: number = 1, limit: number = 20) {
+  getAllBooks(page: number = 1, limit: number = 10) {
     return this.http.get<ApiResponse<Book[]>>(ApiPaths.Books, {
       params: new HttpParams().set('page', page).set('limit', limit),
     });
   }
 
-  getBooks(page: number = 1, limit: number = 20, searchTerm: string) {
+  getBooks(page: number = 1, limit: number = 10, searchTerm: string) {
     return this.http.get<ApiResponse<Book[]>>(ApiPaths.Books, {
       params: new HttpParams()
         .set('page', page)
@@ -38,5 +39,13 @@ export class BooksService {
         .set('title', searchTerm)
         .set('authors', searchTerm),
     });
+  }
+
+  getBookById(id: string) {
+    return this.http.get<ApiResponse<Book>>(`${ApiPaths.Books}/${id}`).pipe(
+      map((res) => {
+        return res.data;
+      })
+    );
   }
 }

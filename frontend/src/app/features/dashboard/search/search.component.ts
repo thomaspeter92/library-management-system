@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { SplitSemicolonPipe } from '../../../shared/pipes/split-semicolon.pipe';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
+import { BookDetailComponent } from './book-detail/book-detail.component';
 
 @Component({
   selector: 'app-search',
@@ -13,36 +15,45 @@ import { SplitSemicolonPipe } from '../../../shared/pipes/split-semicolon.pipe';
     ReactiveFormsModule,
     MatIconModule,
     SplitSemicolonPipe,
+    ModalComponent,
+    BookDetailComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
-  books: Book[] = [];
+  books: Book[] | null = null;
   currentPage: number = 1;
   totalPages!: number;
   totalResults!: number;
   isLoading = false;
   error = '';
   searchForm!: FormGroup;
+  bookDetailOpen = false;
+  selectedBook: string | null = null;
 
   constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
-    this.fetchBooks();
+    // this.fetchBooks();
     this.searchForm = new FormGroup({
       search: new FormControl('', [Validators.required]),
     });
   }
 
   onSubmit() {
-    console.log('subby');
-    this.error = '';
     if (!this.searchForm.valid) return;
+    this.currentPage = 1;
+    this.fetchBooks();
+  }
+
+  fetchBooks() {
+    this.error = '';
     this.isLoading = true;
     const search = this.searchForm.value.search;
+
     this.booksService
-      .getBooks(this.currentPage, 20, search)
+      .getBooks(this.currentPage, 10, search)
       .subscribe((res) => {
         this.books = res.data;
         this.totalPages = res.totalPages || 0;
@@ -50,14 +61,6 @@ export class SearchComponent implements OnInit {
         this.totalResults = res.total || 0;
         console.log(this.books);
       });
-  }
-
-  fetchBooks() {
-    this.booksService.getAllBooks(this.currentPage).subscribe((res) => {
-      this.books = res.data;
-      this.totalPages = res?.totalPages || 0;
-      this.totalResults = res.total || 0;
-    });
   }
 
   nextPage() {
@@ -73,9 +76,25 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  onClearResults() {
+    this.books = null;
+    this.searchForm.reset();
+  }
+
+  onSelectBook(bookId: string) {
+    console.log(bookId);
+    this.selectedBook = bookId;
+    this.bookDetailOpen = true;
+  }
+
+  onCloseBookDetail() {
+    this.bookDetailOpen = false;
+    this.selectedBook = null;
+  }
+
   generateArray(count: number): number[] {
     count = Number(count);
-    console.log(count);
+    if (!count) return [];
     const arr = Array(Math.floor(count)).fill(0);
     return arr;
   }

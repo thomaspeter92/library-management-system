@@ -10,6 +10,10 @@
   transition: all ease 0.2s;
   white-space: nowrap;
 
+  &:focus {
+    outline: auto 1rem var(--blue);
+  }
+
   &-full {
     width: 100%;
   }

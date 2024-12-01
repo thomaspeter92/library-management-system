@@ -1,0 +1,6 @@
+<div class="modalContainer" (click)="closeModal()">
+  <div class="modalContent" (click)="$event.stopPropagation()">
+    <button type="button" class="closeButton" (click)="closeModal()">X</button>
+    <ng-content />
+  </div>
+</div>
