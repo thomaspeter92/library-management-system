@@ -8,19 +8,21 @@ import { LoginGuard } from './core/guards/login.guard';
 import { SearchComponent } from './features/dashboard/search/search.component';
 import { LoansComponent } from './features/dashboard/loans/loans.component';
 import { AccountComponent } from './features/dashboard/account/account.component';
-
-export const alwaysFalseGuard: CanActivateFn = () => {
-  return false; // Always prevents activation
-};
+import { loansResolver } from './features/dashboard/resolvers/loans.resolver';
 
 export const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+
     children: [
       { path: '', component: SearchComponent },
-      { path: 'loans', component: LoansComponent },
+      {
+        path: 'loans',
+        component: LoansComponent,
+        resolve: { loans: loansResolver },
+      },
       { path: 'account', component: AccountComponent },
     ],
   },

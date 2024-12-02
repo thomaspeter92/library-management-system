@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { BaseController } from "./base_controller";
 import { BooksService } from "@/services/books_service";
 import { LoansUtil } from "./loans_controller";
-import { Book } from "@/entities/book";
 
 export class BooksController extends BaseController {
   public async addHandler(req: Request, res: Response): Promise<void> {
@@ -28,10 +27,12 @@ export class BooksController extends BaseController {
 
     const result = await service.findOne(req.params.id);
 
-    const isUnavailable = await LoansUtil.getActiveLoanByBookId(req.params.id);
+    const activeLoan = await LoansUtil.getActiveLoanByBookId(req.params.id);
 
-    if (isUnavailable) {
+    if (activeLoan) {
+      console.log(activeLoan);
       result.data["available"] = false;
+      result.data["isLoanedToCurrentUser"] = activeLoan.user_id === req.user.id;
     } else {
       result.data["available"] = true;
     }
@@ -42,4 +43,17 @@ export class BooksController extends BaseController {
   public updateHandler(req: Request, res: Response): void {}
 
   public deleteHandler(req: Request, res: Response): void {}
+}
+
+export class BooksUtil {
+  public static async getBookByID(book_id: string) {
+    const service = new BooksService();
+
+    const result = await service.findOne(book_id);
+
+    if (result) {
+      return result.data;
+    }
+    return null;
+  }
 }

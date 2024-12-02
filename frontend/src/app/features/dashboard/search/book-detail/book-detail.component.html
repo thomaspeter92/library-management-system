@@ -17,11 +17,24 @@
           aria-hidden="false"
           aria-label="success icon"
           fontIcon="cancel"
-        />Available
+        />Unavailable
       </p>
       }
     </div>
-    <app-button variant="blue" [fullWidth]="true">Loan</app-button>
+    @if(book.available) {<app-button
+      (clicked)="onRequestLoan()"
+      [disabled]="!book.available"
+      variant="blue"
+      [fullWidth]="true"
+      >Loan</app-button
+    >} @else if(!book.available && !book.isLoanedToCurrentUser){
+    <app-button variant="purple" [fullWidth]="true">Reserve</app-button>
+    <p class="reserveNote">
+      *Reserve this book and we'll notify you when it's available again.
+    </p>
+    } @else {
+    <p class="reserveNote">*You are currently loaning this book.</p>
+    }
   </div>
   <div>
     <p class="genre">

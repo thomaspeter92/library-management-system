@@ -8,6 +8,8 @@ import { Book, BooksService } from '../../services/books.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SplitSemicolonPipe } from '../../../../shared/pipes/split-semicolon.pipe';
+import { LoansService } from '../../services/loans.service';
+import { ToastService } from '../../../../shared/components/toast/toast.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -20,12 +22,31 @@ export class BookDetailComponent implements OnInit {
   book!: Book;
   stars: number[] = [];
 
-  constructor(private booksService: BooksService) {}
+  constructor(
+    private booksService: BooksService,
+    private loansService: LoansService,
+    private toastsService: ToastService
+  ) {}
 
   ngOnInit(): void {
+    this.fetchBookDetails();
+  }
+
+  fetchBookDetails() {
     this.booksService.getBookById(this.bookId).subscribe((book) => {
       this.stars = Array(Math.floor(book.rating)).fill(0);
       this.book = book;
+    });
+  }
+
+  onRequestLoan() {
+    this.loansService.createLoan(this.book.id).subscribe((res) => {
+      this.fetchBookDetails();
+      this.toastsService.addToast(
+        'Loan for this book was processed',
+        'success',
+        3000
+      );
     });
   }
 }

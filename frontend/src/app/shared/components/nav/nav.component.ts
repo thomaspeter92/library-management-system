@@ -32,7 +32,6 @@ export class NavComponent implements OnInit {
   }
 
   handleLogout() {
-    console.log('hi');
     this.authService.logout();
   }
 

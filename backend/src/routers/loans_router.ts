@@ -15,5 +15,7 @@ export class LoansRouter {
       .get(controller.getAllHandler)
       .post(validate(newLoanValidator), controller.addHandler)
       .put(validate(updateLoanValidator), controller.updateHandler);
+
+    //
   }
 }

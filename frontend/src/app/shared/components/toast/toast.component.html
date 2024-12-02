@@ -1,0 +1,14 @@
+<div class="toastContainer">
+  @for (toast of toastService.toasts; track $index) {
+  <div [class]="['toast', toast.type]">
+    <mat-icon
+      aria-hidden="false"
+      aria-label="success icon"
+      [fontIcon]="toast.type === 'success' ? 'check_circle' : 'error'"
+      class="availableIcon"
+    />
+    <p>{{ toast.message }}</p>
+    <button (click)="removeToast($index)">X</button>
+  </div>
+  }
+</div>

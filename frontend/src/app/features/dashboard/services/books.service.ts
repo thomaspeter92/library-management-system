@@ -17,6 +17,7 @@ export interface Book {
   subtitle?: string;
   thumbnail?: string;
   available?: boolean; // this is only available on the getBookById response
+  isLoanedToCurrentUser?: boolean;
 }
 
 @Injectable({

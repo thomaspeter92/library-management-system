@@ -1,1 +1,6 @@
-<p>loans works!</p>
+<div>
+  @for (loan of loans; track $index) {
+
+  <p>{{ loan.book?.title }}</p>
+  }
+</div>

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { BaseController } from "./base_controller";
 import { LoanService } from "@/services/loans_service";
 import { Loan } from "@/entities/loan";
+import { BooksUtil } from "./books_controller";
 
 export class LoansController extends BaseController {
   /**
@@ -37,6 +38,12 @@ export class LoansController extends BaseController {
 
     const result = await service.findAll(req.query);
 
+    for (const loan of result.data) {
+      const book = await BooksUtil.getBookByID(loan.book_id);
+
+      loan["book"] = book;
+    }
+
     res.status(result.statusCode).json(result);
   }
 
@@ -54,7 +61,7 @@ export class LoansUtil {
     );
 
     if (result && result.length > 0) {
-      return true;
+      return result[0];
     }
     return false;
   }
@@ -78,4 +85,6 @@ export class LoansUtil {
     }
     return [];
   }
+
+  public static async getAllActiveLoansByUserId(user_id: string) {}
 }

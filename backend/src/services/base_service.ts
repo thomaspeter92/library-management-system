@@ -149,9 +149,18 @@ export class BaseService<T> {
             field !== "page"
           ) {
             const value = queryParams[field];
-            query.orWhere(`LOWER(${field}) LIKE LOWER(:${field})`, {
-              [field]: `%${value}%`,
-            });
+            if (field === "user_id") {
+              query.orWhere(
+                `LOWER(CAST(${field} AS TEXT)) LIKE LOWER(:${field})`,
+                {
+                  [field]: `%${value}%`,
+                }
+              );
+            } else {
+              query.orWhere(`LOWER(${field}) LIKE LOWER(:${field})`, {
+                [field]: `%${value}%`,
+              });
+            }
           }
         }
 
