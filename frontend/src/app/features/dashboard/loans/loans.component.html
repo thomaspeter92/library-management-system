@@ -1,6 +1,12 @@
-<div>
+<div class="container">
   @for (loan of loans; track $index) {
-
-  <p>{{ loan.book?.title }}</p>
+  <div class="row">
+    <img [src]="loan.book?.thumbnail" alt="" />
+    <div>
+      <h3>{{ loan.book?.title }}</h3>
+      <p>{{ loan.book?.authors }}</p>
+      <p>{{ loan.book?.year }}</p>
+    </div>
+  </div>
   }
 </div>

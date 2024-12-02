@@ -1,0 +1,15 @@
+.container {
+  & > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  .row {
+    padding: 1rem;
+    background-color: white;
+    display: flex;
+    gap: 1rem;
+
+    img {
+      height: 6rem;
+    }
+  }
+}
