@@ -16,6 +16,9 @@ export class LoansRouter {
       .post(validate(newLoanValidator), controller.addHandler)
       .put(validate(updateLoanValidator), controller.updateHandler);
 
-    //
+    app
+      .route(this.baseEndpoint + "/active")
+      .all(authorize)
+      .get(controller.getAllActiveLoansByUser);
   }
 }

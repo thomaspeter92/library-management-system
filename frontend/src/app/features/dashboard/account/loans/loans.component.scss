@@ -1,0 +1,65 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.loansList {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  gap: 1rem;
+
+  .header {
+    display: grid;
+    grid-column: 1/-1;
+    grid-template-columns: subgrid;
+    font-size: 1.2rem;
+    color: var(--navy);
+    font-weight: bold;
+  }
+
+  .row {
+    grid-column: 1/-1;
+    padding: 1rem;
+    background-color: white;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+    gap: 1rem;
+
+    .book {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      img {
+        display: none;
+        height: 5rem;
+
+        @media (min-width: 550px) {
+          display: block;
+        }
+      }
+      .bookInfo {
+        & > *:not(:last-child) {
+          margin-bottom: 0.2rem;
+        }
+        .title {
+          color: var(--blue);
+          font-size: 1.1rem;
+        }
+        .authors {
+          color: var(--green);
+          font-weight: 500;
+        }
+        .year {
+          color: var(--gray-500);
+          font-weight: 700;
+        }
+      }
+    }
+
+    .date {
+      font-weight: 500;
+      color: var(--gray-500);
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiPaths } from '../../../../enums/api-paths';
 import { ApiResponse } from '../../../core/models/api-response.model';
 import { AuthService } from '../../../core/services/auth.service';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { Book } from './books.service';
 
 export interface Loan {
@@ -28,11 +28,15 @@ export class LoansService {
     });
   }
 
-  getAllUserLoans() {
+  getAllActiveUserLoans() {
     return this.http
-      .get<ApiResponse<Loan[]>>(
-        ApiPaths.Loans + `?user_id=${this.authService.currentUser.value?.id}`
-      )
+      .get<ApiResponse<Loan[]>>(ApiPaths.Loans + '/active')
       .pipe(map((res) => res.data));
+  }
+
+  returnBook(loanId: string) {
+    return this.http.put<ApiResponse<Loan>>(ApiPaths.Loans, {
+      loan_id: loanId,
+    });
   }
 }

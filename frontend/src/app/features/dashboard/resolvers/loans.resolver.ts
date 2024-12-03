@@ -11,5 +11,5 @@ export const loansResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
-  return inject(LoansService).getAllUserLoans();
+  return inject(LoansService).getAllActiveUserLoans();
 };

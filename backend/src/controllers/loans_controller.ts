@@ -3,6 +3,7 @@ import { BaseController } from "./base_controller";
 import { LoanService } from "@/services/loans_service";
 import { Loan } from "@/entities/loan";
 import { BooksUtil } from "./books_controller";
+import { responseUtil } from "@/util/reponse_util";
 
 export class LoansController extends BaseController {
   /**
@@ -45,6 +46,22 @@ export class LoansController extends BaseController {
     }
 
     res.status(result.statusCode).json(result);
+  }
+
+  public async getAllActiveLoansByUser(req: Request, res: Response) {
+    const result = await LoansUtil.getActiveLoansByUserId(req.user.id);
+
+    for (const loan of result) {
+      const book = await BooksUtil.getBookByID(loan.book_id);
+
+      loan["book"] = book;
+    }
+
+    responseUtil(res, 200, {
+      statusCode: 200,
+      status: "success",
+      data: result,
+    });
   }
 
   public deleteHandler(req: Request, res: Response): void {}
