@@ -1,6 +1,8 @@
+@if(modalService.isVisible | async){
 <div class="modalContainer" (click)="closeModal()">
   <div class="modalContent" (click)="$event.stopPropagation()">
     <button type="button" class="closeButton" (click)="closeModal()">X</button>
-    <ng-content />
+    <ng-container *ngTemplateOutlet="modalService.modalContent"></ng-container>
   </div>
 </div>
+}

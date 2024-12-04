@@ -6,7 +6,8 @@ export class User {
     public lastName: string,
     public roleId: string,
     private accessToken: string,
-    private refreshToken: string
+    private refreshToken: string,
+    public expiry: number
   ) {}
 
   get token() {

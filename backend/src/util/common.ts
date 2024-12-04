@@ -46,7 +46,7 @@ export const ERROR_MESSAGES = {
 
 export const SERVER_CONST = {
   JWTSECRET: "SecretKeyOfPMS-SECRET",
-  ACCESS_TOKEN_EXPIRY_TIME_SECONDS: 1 * 8 * 60 * 60, // 8 hours
+  ACCESS_TOKEN_EXPIRY_TIME_SECONDS: 1 * 1 * 60 * 60, // 1 hour
   REFRESH_TOKEN_EXPIRY_TIME_SECONDS: 5 * 7 * 24 * 60 * 60, // 1 week
 };
 

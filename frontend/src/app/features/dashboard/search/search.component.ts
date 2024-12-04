@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Book, BooksService } from '../services/books.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SplitSemicolonPipe } from '../../../shared/pipes/split-semicolon.pipe';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
+import { ModalService } from '../../../shared/components/modal/modal.service';
 
 @Component({
   selector: 'app-search',
@@ -15,13 +16,14 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
     ReactiveFormsModule,
     MatIconModule,
     SplitSemicolonPipe,
-    ModalComponent,
     BookDetailComponent,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit {
+  @ViewChild('bookDetail', { static: true }) bookDetail!: TemplateRef<any>;
+
   books: Book[] | null = null;
   currentPage: number = 1;
   totalPages!: number;
@@ -32,7 +34,10 @@ export class SearchComponent implements OnInit {
   bookDetailOpen = false;
   selectedBook: string | null = null;
 
-  constructor(private booksService: BooksService) {}
+  constructor(
+    private booksService: BooksService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
     // this.fetchBooks();
@@ -84,7 +89,7 @@ export class SearchComponent implements OnInit {
   onSelectBook(bookId: string) {
     console.log(bookId);
     this.selectedBook = bookId;
-    this.bookDetailOpen = true;
+    this.modalService.openModal(this.bookDetail);
   }
 
   onCloseBookDetail() {

@@ -139,9 +139,10 @@
     }
   </section> -->
 
-  } @if(bookDetailOpen && selectedBook){
-  <app-modal (close)="onCloseBookDetail()">
-    <app-book-detail bookId="{{ selectedBook }}" />
-  </app-modal>
   }
+  <!-- @if(bookDetailOpen && selectedBook){ -->
+  <ng-template #bookDetail>
+    <app-book-detail bookId="{{ selectedBook }}" />
+  </ng-template>
+  <!-- } -->
 </div>

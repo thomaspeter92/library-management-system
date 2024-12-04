@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { ToastComponent } from './shared/components/toast/toast.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ToastComponent],
+  imports: [RouterOutlet, ToastComponent, ModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

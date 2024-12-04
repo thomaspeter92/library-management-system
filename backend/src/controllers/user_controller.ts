@@ -146,6 +146,10 @@ export class UserController extends BaseController {
         ...user,
         access_token: accessToken,
         refresh_token: refreshToken,
+        expiry:
+          Date.now() + SERVER_CONST.ACCESS_TOKEN_EXPIRY_TIME_SECONDS * 1000,
+        refresh_expiry:
+          Date.now() + SERVER_CONST.REFRESH_TOKEN_EXPIRY_TIME_SECONDS * 1000,
       },
     });
 

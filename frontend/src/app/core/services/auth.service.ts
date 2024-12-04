@@ -14,6 +14,7 @@ export type LoginAPIResponse = {
   role_id: string;
   access_token: string;
   refresh_token: string;
+  expiry: number;
 };
 
 @Injectable({
@@ -60,7 +61,8 @@ export class AuthService {
             data.last_name,
             data.role_id,
             data.access_token,
-            data.refresh_token
+            data.refresh_token,
+            data.expiry
           );
           if (user.token) {
             this.currentUser.next(user);
@@ -80,7 +82,8 @@ export class AuthService {
       userData.lastName,
       userData.roldId,
       userData.accessToken,
-      userData.refreshToken
+      userData.refreshToken,
+      userData.expiry
     );
     this.currentUser.next(user);
   }
