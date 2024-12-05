@@ -8,7 +8,7 @@ import { take, tap } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
-  imports: [MatIconModule, RouterLink, ButtonComponent],
+  imports: [MatIconModule, RouterLink],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.scss',
 })

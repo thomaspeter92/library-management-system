@@ -102,6 +102,4 @@ export class LoansUtil {
     }
     return [];
   }
-
-  public static async getAllActiveLoansByUserId(user_id: string) {}
 }

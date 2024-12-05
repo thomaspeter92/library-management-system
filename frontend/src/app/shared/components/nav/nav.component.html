@@ -13,20 +13,13 @@
     </li>
   </ul> -->
   <div class="menuContainer">
-    <button (click)="toggleMenu()" class="menuButton">
+    <a routerLink="/account" class="menuButton">
       <mat-icon
         aria-hidden="false"
         aria-label="success icon"
         fontIcon="account_circle"
       />
       {{ user.lastName }}, {{ user.firstName }}
-    </button>
-    @if(menuOpen){
-    <menu class="menuContent shadow-light">
-      <app-button (clicked)="handleLogout()" variant="cyan">
-        Log out
-      </app-button>
-    </menu>
-    }
+    </a>
   </div>
 </nav>

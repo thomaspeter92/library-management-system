@@ -29,9 +29,37 @@ export class LoansService {
   }
 
   getAllActiveUserLoans() {
+    return this.http.get<ApiResponse<Loan[]>>(ApiPaths.Loans + '/active').pipe(
+      map((res) => {
+        console.log(res.data);
+        return res.data.sort(
+          (a, b) =>
+            new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
+        );
+      })
+    );
+  }
+
+  getAllPastUserLoans() {
     return this.http
-      .get<ApiResponse<Loan[]>>(ApiPaths.Loans + '/active')
-      .pipe(map((res) => res.data));
+      .get<ApiResponse<Loan[]>>(ApiPaths.Loans, {
+        params: new HttpParams().append(
+          'user_id',
+          this.authService.currentUser.value?.id!
+        ),
+      })
+      .pipe(
+        map((res) => {
+          const pastLoans = res.data
+            .filter((loan) => !!loan.return_date)
+            .sort(
+              (a, b) =>
+                new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
+            );
+          console.log(pastLoans);
+          return pastLoans;
+        })
+      );
   }
 
   returnBook(loanId: string) {

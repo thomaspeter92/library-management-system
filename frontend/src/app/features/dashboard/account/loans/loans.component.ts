@@ -14,7 +14,8 @@ import { ToastService } from '../../../../shared/components/toast/toast.service'
   styleUrl: './loans.component.scss',
 })
 export class LoansComponent implements OnInit {
-  loans!: Loan[];
+  activeLoans!: Loan[];
+  pastLoans!: Loan[];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,13 +24,8 @@ export class LoansComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Subscribe
-    // this.route.data.subscribe((data) => {
-    //   this.loans = data['loans'];
-    // });
-
-    // // Direct Access
-    this.loans = this.route.snapshot.data['loans'];
+    this.activeLoans = this.route.snapshot.data['loans']['activeLoans'];
+    this.pastLoans = this.route.snapshot.data['loans']['pastLoans'];
   }
 
   onReturn(loanId: string) {
@@ -38,7 +34,7 @@ export class LoansComponent implements OnInit {
       next: () => {
         this.toastService.addToast('Return request processed', 'success', 3000);
         this.loansService.getAllActiveUserLoans().subscribe((res) => {
-          this.loans = res;
+          this.activeLoans = res;
         });
       },
       error: () => {},
