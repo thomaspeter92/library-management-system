@@ -65,12 +65,6 @@
   <section class="resultsContainer2">
     @for (book of books; track $index) {
     <article class="card" (click)="onSelectBook(book.id)">
-      <!-- <mat-icon
-        aria-hidden="false"
-        aria-label="success icon"
-        fontIcon="check_circle"
-        class="availableIcon"
-      /> -->
       @if(book.thumbnail){
       <img src="{{ book.thumbnail }}" />
       }@else {

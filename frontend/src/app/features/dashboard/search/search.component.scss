@@ -69,8 +69,10 @@
 
   .resultsInfo {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 0.8rem;
 
     h2 {
       color: var(--blue);
@@ -113,7 +115,7 @@
       padding: 1rem;
       background-color: white;
       display: grid;
-      grid-template-columns: 110px 6fr;
+      grid-template-columns: 1.5fr 6fr;
       gap: 1rem;
 
       &:hover {
@@ -133,6 +135,7 @@
 
       img {
         width: 100%;
+        // max-width: 200px;
       }
       .iconContainer {
         background-color: var(--stone);
