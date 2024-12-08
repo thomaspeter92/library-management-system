@@ -43,10 +43,10 @@ export class LoansService {
   getAllPastUserLoans() {
     return this.http
       .get<ApiResponse<Loan[]>>(ApiPaths.Loans, {
-        params: new HttpParams().append(
-          'user_id',
-          this.authService.currentUser.value?.id!
-        ),
+        params: new HttpParams()
+          .append('user_id', this.authService.currentUser.value?.id!)
+          .append('page', 1)
+          .append('limit', 5),
       })
       .pipe(
         map((res) => {

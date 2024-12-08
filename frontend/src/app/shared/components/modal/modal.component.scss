@@ -13,12 +13,14 @@
     background-color: white;
     padding: 0.3rem;
     width: 50rem;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 95%;
+    max-height: 95%;
     position: relative;
     overflow: auto;
 
     @media (min-width: 500px) {
+      max-width: 90%;
+      max-height: 90%;
       padding: 1rem;
     }
 
