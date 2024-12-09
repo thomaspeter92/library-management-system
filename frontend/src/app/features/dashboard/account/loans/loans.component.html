@@ -43,7 +43,12 @@
       </div>
     </div>
   </div>
-  } @if(!pastLoans || pastLoans.length < 1) {
+  } @if(this.currentPage < this.totalPages){<app-button
+    variant="blue"
+    [fullWidth]="true"
+    (clicked)="handlePage()"
+    >More</app-button
+  >} @if(!pastLoans || pastLoans.length < 1) {
   <div class="noLoans">
     <p>You currently have no loans history.</p>
   </div>

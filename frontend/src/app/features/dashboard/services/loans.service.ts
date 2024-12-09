@@ -40,24 +40,25 @@ export class LoansService {
     );
   }
 
-  getAllPastUserLoans() {
+  getAllPastUserLoans(page: number = 1, limit: number = 5) {
     return this.http
       .get<ApiResponse<Loan[]>>(ApiPaths.Loans, {
         params: new HttpParams()
           .append('user_id', this.authService.currentUser.value?.id!)
-          .append('page', 1)
-          .append('limit', 5),
+          .append('page', page)
+          .append('limit', limit),
       })
       .pipe(
         map((res) => {
+          console.log(res);
           const pastLoans = res.data
             .filter((loan) => !!loan.return_date)
             .sort(
               (a, b) =>
                 new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
             );
-          console.log(pastLoans);
-          return pastLoans;
+
+          return { totalPages: res.totalPages, loans: pastLoans };
         })
       );
   }

@@ -18,35 +18,8 @@
       <app-button variant="navy">Search</app-button>
     </form>
   </section>
-  @if(!books) {
-  <section class="features">
-    <button class="featureButton">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="success icon"
-        fontIcon="menu_book"
-      />
-      <p>Search Books</p>
-    </button>
-    <button class="featureButton">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="success icon"
-        fontIcon="check_circle"
-      />
-      <p>Search Books</p>
-    </button>
-    <button class="featureButton">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="success icon"
-        fontIcon="manage_accounts"
-        class="availableIcon"
-      />
-      <p>Search Books</p>
-    </button>
-  </section>
-  } @else if(books && books.length < 1) {
+
+  @if(books && books.length < 1) {
   <div class="noResults">
     <h3>No Results</h3>
     <p>

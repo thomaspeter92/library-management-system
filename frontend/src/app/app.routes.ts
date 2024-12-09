@@ -5,7 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
 import { SearchComponent } from './features/dashboard/search/search.component';
 import { AccountComponent } from './features/dashboard/account/account.component';
-import { loansResolver } from './features/dashboard/resolvers/loans.resolver';
+import { acccountResolver } from './features/dashboard/resolvers/account';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,7 @@ export const routes: Routes = [
       {
         path: 'account',
         component: AccountComponent,
-        resolve: { loans: loansResolver },
+        resolve: { account: acccountResolver },
       },
     ],
   },

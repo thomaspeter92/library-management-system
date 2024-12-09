@@ -1,11 +1,14 @@
 .container {
   display: grid;
   grid-template-columns: 1fr;
+  max-width: 50rem;
+  gap: 2rem;
+  margin: auto;
 
   @media (min-width: 600px) {
     grid-template-columns: 1fr 1fr;
   }
   @media (min-width: 750px) {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 2fr 4fr;
   }
 }

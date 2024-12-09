@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>User</h2>
+
+  <div class="profile">
+    <div class="avatar">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="success icon"
+        fontIcon="person"
+      />
+    </div>
+    <div class="info">
+      <p class="name">{{ user?.lastName }}, {{ user?.firstName }}</p>
+
+      <p>
+        {{ user?.email }}
+      </p>
+    </div>
+    <app-button variant="blue">Edit Info</app-button>
+  </div>
+</div>

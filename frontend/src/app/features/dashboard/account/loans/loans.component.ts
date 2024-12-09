@@ -16,6 +16,8 @@ import { ToastService } from '../../../../shared/components/toast/toast.service'
 export class LoansComponent implements OnInit {
   activeLoans!: Loan[];
   pastLoans!: Loan[];
+  currentPage: number = 1;
+  totalPages!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,8 +26,26 @@ export class LoansComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activeLoans = this.route.snapshot.data['loans']['activeLoans'];
-    this.pastLoans = this.route.snapshot.data['loans']['pastLoans'];
+    console.log(this.route.snapshot);
+    this.activeLoans = this.route.snapshot.data['account']['activeLoans'];
+    this.pastLoans = this.route.snapshot.data['account']['pastLoans']['loans'];
+    this.totalPages =
+      this.route.snapshot.data['account']['pastLoans']['totalPages'];
+  }
+
+  handlePage() {
+    if (this.currentPage === this.totalPages) return;
+    this.currentPage += 1;
+    this.fetchLoansHistory();
+  }
+
+  fetchLoansHistory(): void {
+    this.loansService.getAllPastUserLoans(this.currentPage).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.pastLoans = [...this.pastLoans, ...res.loans];
+      },
+    });
   }
 
   onReturn(loanId: string) {
