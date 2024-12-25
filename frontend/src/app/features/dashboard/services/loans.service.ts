@@ -14,6 +14,7 @@ export interface Loan {
   due_date: Date;
   return_date: Date;
   book?: Book;
+  outstanding?: boolean;
 }
 
 @Injectable({
