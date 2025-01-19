@@ -43,21 +43,15 @@ export class LoansService {
 
   getAllPastUserLoans(page: number = 1, limit: number = 5) {
     return this.http
-      .get<ApiResponse<Loan[]>>(ApiPaths.Loans, {
-        params: new HttpParams()
-          .append('user_id', this.authService.currentUser.value?.id!)
-          .append('page', page)
-          .append('limit', limit),
+      .get<ApiResponse<Loan[]>>(ApiPaths.Loans + '/past', {
+        params: new HttpParams().append('page', page).append('limit', limit),
       })
       .pipe(
         map((res) => {
-          console.log(res);
-          const pastLoans = res.data
-            .filter((loan) => !!loan.return_date)
-            .sort(
-              (a, b) =>
-                new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
-            );
+          const pastLoans = res.data.sort(
+            (a, b) =>
+              new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
+          );
 
           return { totalPages: res.totalPages, loans: pastLoans };
         })

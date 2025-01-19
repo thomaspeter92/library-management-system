@@ -4,6 +4,7 @@ import { LoanService } from "@/services/loans_service";
 import { Loan } from "@/entities/loan";
 import { BooksUtil } from "./books_controller";
 import { responseUtil } from "@/util/reponse_util";
+import { ApiResponse } from "@/services/base_service";
 
 export class LoansController extends BaseController {
   /**
@@ -62,6 +63,23 @@ export class LoansController extends BaseController {
       status: "success",
       data: result,
     });
+  }
+
+  public async getAllPastUserLoans(req: Request, res: Response) {
+    const service = new LoanService();
+
+    const result = await service.getAllPastUserLoans(
+      req.user.id,
+      +req.query.page,
+      +req.query.limit
+    );
+
+    for (const loan of result.data) {
+      const book = await BooksUtil.getBookByID(loan.book_id);
+      loan["book"] = book;
+    }
+
+    res.status(result.statusCode).json(result);
   }
 
   public deleteHandler(req: Request, res: Response): void {}

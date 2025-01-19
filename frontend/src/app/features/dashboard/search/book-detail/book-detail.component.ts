@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SplitSemicolonPipe } from '../../../../shared/pipes/split-semicolon.pipe';
 import { LoansService } from '../../services/loans.service';
 import { ToastService } from '../../../../shared/components/toast/toast.service';
+import { ModalService } from '../../../../shared/components/modal/modal.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -25,7 +26,8 @@ export class BookDetailComponent implements OnInit {
   constructor(
     private booksService: BooksService,
     private loansService: LoansService,
-    private toastsService: ToastService
+    private toastsService: ToastService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class BookDetailComponent implements OnInit {
         'success',
         3000
       );
+      this.modalService.closeModal();
     });
   }
 }

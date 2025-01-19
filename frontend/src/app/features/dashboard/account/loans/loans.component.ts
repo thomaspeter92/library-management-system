@@ -42,7 +42,7 @@ export class LoansComponent implements OnInit {
   fetchLoansHistory(): void {
     this.loansService.getAllPastUserLoans(this.currentPage).subscribe({
       next: (res) => {
-        console.log(res);
+        console.log('LOANS HISTORY: ', res);
         this.pastLoans = [...this.pastLoans, ...res.loans];
       },
     });

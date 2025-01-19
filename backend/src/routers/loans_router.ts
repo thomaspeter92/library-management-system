@@ -20,5 +20,10 @@ export class LoansRouter {
       .route(this.baseEndpoint + "/active")
       .all(authorize)
       .get(controller.getAllActiveLoansByUser);
+
+    app
+      .route(this.baseEndpoint + "/past")
+      .all(authorize)
+      .get(controller.getAllPastUserLoans);
   }
 }
