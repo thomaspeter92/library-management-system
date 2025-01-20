@@ -80,7 +80,21 @@ export class UserController extends BaseController {
       });
     }
   }
-  public updateHandler(req: Request, res: Response): void {}
+
+  public async updateHandler(req: Request, res: Response): Promise<void> {
+    const service = new UserService();
+    const user = req.body;
+
+    console.log(req.body);
+
+    user.email = user?.email?.toLowerCase();
+
+    const result = await service.update(req.user.id, user);
+    delete result.data.password;
+    delete result.data.created_at;
+
+    res.status(result.statusCode).json(result);
+  }
 
   public async deleteHandler(req: Request, res: Response): Promise<void> {
     const service = new UserService();

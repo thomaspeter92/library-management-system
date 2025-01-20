@@ -40,7 +40,7 @@ export class LoansComponent implements OnInit {
   }
 
   fetchLoansHistory(): void {
-    this.loansService.getAllPastUserLoans(this.currentPage).subscribe({
+    this.loansService.getAllPastUserLoans(this.currentPage, 5).subscribe({
       next: (res) => {
         console.log('LOANS HISTORY: ', res);
         this.pastLoans = [...this.pastLoans, ...res.loans];
@@ -49,13 +49,14 @@ export class LoansComponent implements OnInit {
   }
 
   onReturn(loanId: string) {
-    console.log(loanId);
     this.loansService.returnBook(loanId).subscribe({
       next: () => {
         this.toastService.addToast('Return request processed', 'success', 3000);
         this.loansService.getAllActiveUserLoans().subscribe((res) => {
           this.activeLoans = res;
         });
+        this.pastLoans = [];
+        this.fetchLoansHistory();
       },
       error: () => {},
     });

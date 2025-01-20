@@ -1,6 +1,6 @@
 import { UserController } from "@/controllers/user_controller";
 import { authorize } from "@/util/auth_util";
-import { newUserValidator } from "@/validators/user";
+import { newUserValidator, updateUserValidator } from "@/validators/user";
 import { validate } from "@/validators/validate";
 import { Express } from "express";
 
@@ -16,7 +16,8 @@ export class UserRouter {
       .route(this.baseEndpoint)
       .all(authorize)
       .get(controller.getAllHandler)
-      .post(validate(newUserValidator), controller.addHandler);
+      .post(validate(newUserValidator), controller.addHandler)
+      .put(controller.updateHandler);
 
     app
       .route(this.baseEndpoint + "/:id")

@@ -16,6 +16,11 @@
         {{ user?.email }}
       </p>
     </div>
-    <app-button variant="blue">Edit Info</app-button>
+    <app-button variant="blue" (click)="onEditUser()">Edit Info</app-button>
+    <button (click)="onLogout()" class="logoutButton">Log Out</button>
   </div>
 </div>
+
+<ng-template #editUser>
+  <app-edit-user />
+</ng-template>

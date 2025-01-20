@@ -16,3 +16,13 @@ export const newUserValidator = [
     .withMessage("Password format"),
   body("role_id").isUUID().withMessage("Must be a valid UUID"),
 ];
+
+export const updateUserValidator = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .isEmail()
+    .withMessage("A valid email is required"),
+  body("first_name").trim().notEmpty().withMessage("First name is required"),
+  body("last_name").trim().notEmpty().withMessage("Last name is required"),
+];

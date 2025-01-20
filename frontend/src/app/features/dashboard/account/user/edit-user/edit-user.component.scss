@@ -1,0 +1,11 @@
+.formGroup {
+  margin: 1rem 0rem;
+
+  & > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  & > *.ng-dirty.ng-touched {
+    border-color: var(--red);
+  }
+}

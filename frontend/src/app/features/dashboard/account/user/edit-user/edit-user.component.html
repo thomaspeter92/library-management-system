@@ -1,0 +1,49 @@
+<form class="loginForm" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+  <div class="formGroup">
+    <label class="label" for="email">Email</label>
+    <input
+      class="textInput"
+      id="email"
+      type="email"
+      autocomplete="off"
+      email
+      required
+      formControlName="email"
+    />
+    @if(submitted && !editUserForm.get('email')?.valid){
+    <app-validation-error>Please enter a valid email.</app-validation-error>
+    }
+  </div>
+  <div class="formGroup">
+    <label class="label" for="firstName">First Name</label>
+    <input
+      class="textInput"
+      id="firstName"
+      type="text"
+      autocomplete="off"
+      required
+      formControlName="firstName"
+    />
+    @if(submitted && !editUserForm.get('firstName')?.valid){
+    <app-validation-error>First name is required.</app-validation-error>
+    }
+  </div>
+  <div class="formGroup">
+    <label class="label" for="email">Last Name</label>
+    <input
+      class="textInput"
+      id="lastName"
+      type="text"
+      autocomplete="off"
+      required
+      formControlName="lastName"
+    />
+    @if(submitted && !editUserForm.get('lastName')?.valid){
+    <app-validation-error>Last name is required.</app-validation-error>
+    }
+  </div>
+
+  <app-button [disabled]="!editUserForm.dirty" variant="blue"
+    >Submit</app-button
+  >
+</form>

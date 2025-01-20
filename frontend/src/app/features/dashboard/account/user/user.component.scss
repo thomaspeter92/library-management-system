@@ -44,4 +44,11 @@
       color: var(--blue);
     }
   }
+
+  .logoutButton {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--green);
+    text-decoration: underline;
+  }
 }

@@ -18,4 +18,15 @@ export class UserService {
       })
     );
   }
+
+  editUserDetails(data: {
+    email: string;
+    first_name: string;
+    last_name: string;
+  }) {
+    console.log(data);
+    return this.http
+      .put<ApiResponse<User>>(`${ApiPaths.User}`, data)
+      .pipe(map((res) => res.data));
+  }
 }
